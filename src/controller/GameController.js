@@ -16,7 +16,7 @@ class GameController {
   start() {
     Console.print(GAME_INFORMATION.start);
     const onDeliveryInputNumber = (input) => {
-      console.log('input은 ', input);
+      this.#game.calculateScore(input);
     };
     InputView.readNumber(onDeliveryInputNumber);
   }

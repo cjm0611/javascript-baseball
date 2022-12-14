@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { BASEBALL_CONSTANT } = require('../constant/GameSetting');
 const { GAME_INFORMATION, ERROR_MESSAGE } = require('../constant/Message');
 
 const InputView = {
