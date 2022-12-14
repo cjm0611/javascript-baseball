@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_INFORMATION } = require('../constant/Message');
 const { BASEBALL_CONSTANT } = require('../constant/GameSetting');
+const { GAME_INFORMATION, ERROR_MESSAGE } = require('../constant/Message');
 
 const InputView = {
   readNumber(callback) {
@@ -11,36 +11,21 @@ const InputView = {
   },
 
   handleExceptionWrongInput(number) {
-    this.handleExceptionNotNumber(number);
-    this.handleExceptionWrongLength(number);
-    this.handleExceptionOutOfRange(number);
+    this.handleExceptionWrongFormat(number);
     this.handleExceptionDeplication(number);
   },
 
-  handleExceptionNotNumber(number) {
-    if (Number.isNaN(Number(number))) {
-      throw '숫자만 입력해주세요';
+  handleExceptionWrongFormat(number) {
+    const regex = /^[1-9]{3}/;
+    if (!regex.test(number)) {
+      throw ERROR_MESSAGE.format;
     }
-  },
-
-  handleExceptionWrongLength(number) {
-    if (number.length !== 3) {
-      throw '세 자리의 숫자를 입력해주세요';
-    }
-  },
-
-  handleExceptionOutOfRange(number) {
-    [...number].forEach((digit) => {
-      if (digit < BASEBALL_CONSTANT.min || digit > BASEBALL_CONSTANT.max) {
-        throw '각 자리의 숫자는 1~9만 허용합니다';
-      }
-    });
   },
 
   handleExceptionDeplication(number) {
     const numberSet = new Set(number);
     if (number.length !== numberSet.size) {
-      throw '각 자리의 숫자는 모두 달라야 합니다';
+      throw ERROR_MESSAGE.deplication;
     }
   },
 };
