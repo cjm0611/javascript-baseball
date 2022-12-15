@@ -15,7 +15,7 @@ const InputView = {
   },
 
   handleExceptionWrongFormat(number) {
-    const regex = /^[1-9]{3}/;
+    const regex = /^[1-9]{3}$/;
     if (!regex.test(number)) {
       throw ERROR_MESSAGE.format;
     }
