@@ -4,6 +4,7 @@ const { GAME_INFORMATION } = require('../constant/Message');
 const BaseballGame = require('../model/BaseballGame');
 const BaseballMaker = require('../model/BaseballMaker');
 const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
 
 class GameController {
   #game;
@@ -15,9 +16,21 @@ class GameController {
 
   start() {
     Console.print(GAME_INFORMATION.start);
+    this.readPlayeGuess();
+  }
+
+  readPlayeGuess() {
     const onDeliveryInputNumber = (input) => {
-      this.#game.calculateScore(input);
+      const { ball, strike } = this.#game.calculateScore(input);
+      const IS_ANSWER = this.#game.checkAnswer(input);
+      OutputView.printScore(ball, strike);
+      if (IS_ANSWER) {
+        return;
+      }
+
+      this.readPlayeGuess();
     };
+
     InputView.readNumber(onDeliveryInputNumber);
   }
 }
