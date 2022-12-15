@@ -1,10 +1,10 @@
 const GameController = require('./controller/GameController');
 
 class App {
-  #game = new GameController();
+  #controller = new GameController();
 
   play() {
-    this.#game.start();
+    this.#controller.start();
   }
 }
 
