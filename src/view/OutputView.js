@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { SCORE_MESSAGE } = require('../constant/Message');
+const { GAME_INFORMATION, SCORE_MESSAGE } = require('../constant/Message');
 
 const OutputView = {
   printScore(ball, strike) {
@@ -14,6 +14,10 @@ const OutputView = {
     }
 
     Console.print(scoreInfo);
+  },
+
+  printGameEnd() {
+    Console.print(GAME_INFORMATION.end);
   },
 };
 

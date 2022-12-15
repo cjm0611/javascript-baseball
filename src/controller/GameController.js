@@ -10,12 +10,18 @@ class GameController {
   #game;
 
   constructor() {
-    const answer = BaseballMaker.makeBaseball(BASEBALL_CONSTANT.length);
-    this.#game = new BaseballGame(answer);
+    this.#game = new BaseballGame();
   }
 
   start() {
     Console.print(GAME_INFORMATION.start);
+    this.makeAnswer();
+  }
+
+  makeAnswer() {
+    const answer = BaseballMaker.makeBaseball(BASEBALL_CONSTANT.length);
+    console.log(answer);
+    this.#game.setAnswer(answer);
     this.readPlayeGuess();
   }
 
@@ -23,15 +29,39 @@ class GameController {
     const onDeliveryInputNumber = (input) => {
       const { ball, strike } = this.#game.calculateScore(input);
       const IS_ANSWER = this.#game.checkAnswer(input);
-      OutputView.printScore(ball, strike);
-      if (IS_ANSWER) {
-        return;
-      }
-
-      this.readPlayeGuess();
+      this.printScore(ball, strike, IS_ANSWER);
     };
 
     InputView.readNumber(onDeliveryInputNumber);
+  }
+
+  printScore(ball, strike, IS_ANSWER) {
+    OutputView.printScore(ball, strike);
+    if (!IS_ANSWER) {
+      this.readPlayeGuess();
+      return;
+    }
+
+    OutputView.printGameEnd();
+    this.readRetryChoice();
+  }
+
+  readRetryChoice() {
+    const onDeliverRetryChoice = (input) => {
+      if (input === BASEBALL_CONSTANT.retry) {
+        this.makeAnswer();
+      }
+
+      if (input === BASEBALL_CONSTANT.quit) {
+        this.gameQuit();
+      }
+    };
+
+    InputView.readRetryChoice(onDeliverRetryChoice);
+  }
+
+  gameQuit() {
+    Console.close();
   }
 }
 

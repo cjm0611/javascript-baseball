@@ -1,8 +1,8 @@
 class BaseballGame {
   #answer;
 
-  constructor(number) {
-    this.#answer = number;
+  setAnswer(answer) {
+    this.#answer = answer;
   }
 
   calculateScore(playerGuess) {
