@@ -20,7 +20,6 @@ class GameController {
 
   makeAnswer() {
     const answer = BaseballMaker.makeBaseball(BASEBALL_CONSTANT.length);
-    console.log(answer);
     this.#game.setAnswer(answer);
     this.readPlayeGuess();
   }
