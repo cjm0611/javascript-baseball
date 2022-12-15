@@ -2,7 +2,7 @@ const { mockQuestions, mockRandoms, getLogSpy } = require('./ApplicationTest');
 const App = require('../src/App');
 
 describe('사용자가 입력한 숫자와 정답 숫자 비교', () => {
-  test('게임 종료 후 재시작', () => {
+  test('모든 경우의 수 확인', () => {
     const randoms = [1, 2, 3];
     const answers = ['567', '367', '217', '312', '983', '923', '329', '123'];
     const logSpy = getLogSpy();
